@@ -1,0 +1,54 @@
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    align-self: center;
+    font-weight: bold;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.color-selections {
+    text-align: center;
+    align-self: center;
+    padding-bottom: 2vh;
+}
+
+.container {
+    display: grid;
+    border: 3px solid green;
+    grid-gap: 1px;
+    height: 400px;
+    width: 400px;
+    justify-content: start;
+    grid-auto-flow: row; 
+    margin-left: auto;        /* center the div horizontally*/
+    margin-right: auto;       /* center the div horizontally*/
+}
+
+.pixel {
+    background: gray;
+}
+
+/* color selections */
+.black-paint {
+    background: black;
+}
+.red-paint {
+    background: red;
+}
+
+.clear-paint {
+    background: gray;
+}
+
+/* end of color selections */
+
+footer {
+    text-align: center;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    color: gray;
+}
