@@ -110,10 +110,3 @@ function hoverEffects(e) {
         console.log(targetPixel);
     }
 }
-
-// function resetSliders() {
-//     if (gridValue ==! 0) {
-//         console.log(gridValue);
-//         return gridValue = 0;
-//     } 
-// }
