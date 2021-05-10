@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Pacifico&family=Roboto&display=swap');
+
+* {
+    background-color: #DDFFE7;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -6,8 +13,70 @@ main {
 h1 {
     align-self: center;
     font-weight: bold;
-    padding-top: 2vh;
+    font-family: Pacifico;
+    color: #167D7F;
+    padding-top: 3vh;
+    padding-bottom: 1vh;
+    font-size: 30px;
+}
+
+
+.slidecontainer {
+    align-self: center;
+    padding-top: 1vh;
     padding-bottom: 2vh;
+    width: 33%
+    /* padding-right: 53vh; */
+}
+
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    position: relative;
+    width: 100%; 
+    height: 10px; /* Specified height */
+    background: #98D7C2; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    align-self: center;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 10; /* Fully shown on mouse-over */
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 10px; /* Set a specific slider handle width */
+    height: 10px; /* Slider handle height */
+    background: red; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 10px; /* Set a specific slider handle width */
+    height: 10px; /* Slider handle height */
+    background: #167D7F; /* Green background */
+    cursor: alias; /* Cursor on hover */
+  }
+
+button {
+    background: #167D7F;
+    font-family: Montserrat;
+    font-size: 11px;
+    font-weight: bold;
+    color: #DDFFE7;
+    border-radius: 10px;
+    border: 2px solid #29A0B1;
+}
+
+button:hover {
+    background: #ddffe7;
+    color: #29A0B1;
 }
 
 .color-selections {
@@ -18,7 +87,7 @@ h1 {
 
 .container {
     display: grid;
-    border: 3px solid green;
+    border: 3px solid #29A0B1;
     grid-gap: 1px;
     height: 400px;
     width: 400px;
@@ -26,29 +95,24 @@ h1 {
     grid-auto-flow: row; 
     margin-left: auto;        /* center the div horizontally*/
     margin-right: auto;       /* center the div horizontally*/
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
 }
 
 .pixel {
-    background: gray;
+    background: #98d7c2;
 }
 
-/* color selections */
-.black-paint {
-    background: black;
+div {
+    cursor: cell;
 }
-.red-paint {
-    background: red;
-}
-
-.clear-paint {
-    background: gray;
-}
-
-/* end of color selections */
 
 footer {
     text-align: center;
     padding-top: 2vh;
     padding-bottom: 2vh;
-    color: gray;
+    color: #98d7c2;
+    font-family: Montserrat;
+    opacity: 40%;
+    font-size: 13px;
 }

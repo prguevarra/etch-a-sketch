@@ -1,5 +1,6 @@
 //query selectors
 let boardContainer = document.querySelector('.container');
+
 // query selectors for buttons 
 let buttonSelections = document.querySelectorAll('button');
 let blackButton = document.querySelector('button.black');
@@ -7,64 +8,98 @@ let redButton = document.querySelector('red');
 let rgbButton = document.querySelector('rgb');
 let clearButton = document.querySelector('clear');
 
+//query selectors for sliders
+let sizeSlider = document.querySelector("#sizeRange");
 
-///////////////////generate random colors//////////////
-// const randomColorArray = ['orange', 'yellow', 'blue', 'violet', 'green', 'pink', 'purple', 'brown'];
-// const randomColor = function() {
-//     randomColorArray.forEach.
-//     // for(i=0; i<randomColorArray.length; i++){
-//     //     const colorRandomSelected = Math.floor(Math.random()*randomColorArray[i]);
-//     //     return colorRandomSelected;
-//     // }
-// }
-////////////////////////////////////////////////
+//////////////////////////////////////////////////////
 
-///////////////////event listener for buttons color selection/////////////////////////////////////////////
-let colorSelected;
 // event listeners for the buttons
-buttonSelections.forEach((button, index) => {
-
+buttonSelections.forEach((button) => {
     button.addEventListener('click', boardDoodleColor)
 });
 
+// set colors of hover "effect"
+let colorSelected;
 function boardDoodleColor(e) {
-    // console.log(e);
     let bucketSelection = e.target.getAttribute('class');
-    // console.log(bucketSelection);
     if (bucketSelection === "black") {
-        // targetPixel.classList.add('black-paint');
         colorSelected = "black";
     } else if (bucketSelection === "red") {
         colorSelected = "red";
     } else if (bucketSelection === "rgb"){
         colorSelected = "randomColor";
-    }  else if (bucketSelection === "clear") {
-        colorSelected = "clear";
+    } else if (bucketSelection === "eraser") {
+        colorSelected = "eraser";
+    } else if (bucketSelection === "clear") {
+        clearBoard();
     } 
-    console.log(colorSelected);
     return colorSelected; 
-       // targetPixel.classList.add('red-paint');
+}
+
+// generate random colors
+let randomColor = function() {
+    colorSelection = Math.floor(Math.random()*16777215).toString(16);
+    return colorSelection;
+}
+
+// choose color to change divs upon hover
+function paintPixel(targetPixel) {
+    if (colorSelected === "black") {
+        targetPixel.setAttribute('style', 'background: #A0AFB7');
+    } else if (colorSelected === "red") {
+        targetPixel.setAttribute('style', 'background: #7391c8');
+    } else if (colorSelected === "randomColor") {
+        targetPixel.setAttribute('style', `background: ${'#' + randomColor()}`);
+    } else if (colorSelected === "eraser") {
+        targetPixel.setAttribute('style', 'background: #98d7c2');
+    } else {
+        targetPixel.setAttribute('style', 'background: #A0AFB7');
+    }
+}
+
+// clear all doodles
+function clearBoard() {
+    allPixels = document.querySelectorAll('.pixel');
+        allPixels.forEach((pixel) => {
+            pixel.setAttribute('style', 'background: #98d7c2');
+        });
 }
 
 //////////////////////////////////////////////////////
+// const gridValue =  Number(window.prompt("Set the dimension"));
+// const gridDimensions = UserSet * UserSet;
 
-// ask for user input
-const UserSet =  Number(window.prompt("Set the dimension"));
-const gridDimensions = UserSet * UserSet;
+gridSetDimensions(16);
+// resetSliders();
+sizeSlider.addEventListener("change", gridSizeUserDefined);
 
-// create a number of divs depending on user input dimension
-for (i=0; i < gridDimensions; i++) {
-    const pixel = document.createElement('div');
-    pixel.classList.add('pixel');
-    boardContainer.appendChild(pixel);
+function gridSizeUserDefined(e) {
+    let gridValue = e.target.valueAsNumber;
+    gridSetDimensions(gridValue);
+    addStyleProperties(gridValue);
 }
 
-// Set the number of rows and columns of grid children
-boardContainer.style['gridTemplateRows'] = `repeat(${UserSet}, 1fr)`;
-boardContainer.style['gridTemplateColumns'] = `repeat(${UserSet}, 1fr)`;
+// create a number of divs depending on user input dimension
 
-// Add event listener to divs
-boardContainer.addEventListener('mouseover', hoverEffects);
+function gridSetDimensions(gridValue) {
+    // console.log(gridValue);
+    boardContainer.textContent = '';
+    for (i=0; i < (gridValue * gridValue); i++) {
+        const pixel = document.createElement('div');
+        pixel.classList.add('pixel');
+        boardContainer.appendChild(pixel);
+    }
+}
+
+// Set the number of rows and columns of grid children 
+function addStyleProperties(gridValue) {
+    boardContainer.style['gridTemplateRows'] = `repeat(${gridValue}, 1fr)`;
+    boardContainer.style['gridTemplateColumns'] = `repeat(${gridValue}, 1fr)`;
+    console.log(gridValue);
+}
+
+// Add event listener to divs/pixels
+    boardContainer.addEventListener('mouseover', hoverEffects);
 
 // Add effects on divs upon mouse hover
 function hoverEffects(e) {
@@ -76,27 +111,9 @@ function hoverEffects(e) {
     }
 }
 
-// choose color to change divs upon hover
-function paintPixel(targetPixel) {
-    if (colorSelected === "black") {
-        targetPixel.setAttribute('style', 'background: black');
-    } else if (colorSelected === "red") {
-        targetPixel.setAttribute('style', 'background: red');
-    } 
-    // else if (colorSelected === "rgb") {
-        // targetPixel.setAttribute('style', 'background: ${randomColor}');
-    // }
-     else if (colorSelected === "clear") {
-        targetPixel.setAttribute('style', 'background: gray');
-    } else {
-        targetPixel.setAttribute('style', 'background: black');
-    }
-}
-
-
-
-// grid-template-rows: 1fr 50px 1fr 1fr; 
-// for (i=0; i < UserSetDimension; i++) {
-//     pixel[i] = document.createElement('div');
-//     console.log(UserSetDimension);
+// function resetSliders() {
+//     if (gridValue ==! 0) {
+//         console.log(gridValue);
+//         return gridValue = 0;
+//     } 
 // }
